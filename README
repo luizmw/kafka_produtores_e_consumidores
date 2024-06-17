@@ -1,0 +1,54 @@
+--------------------------------------------------
+Produtor e Consumidor Kafka com Python
+    SO Linux Ubuntu server 22.04
+==================================================
+
+Este projeto demonstra como usar o Apache Kafka para enviar e receber mensagens utilizando Python. Ele inclui implementações para um produtor e um consumidor que interagem com um cluster Kafka local.
+
+    Requisitos:
+        Java (versão 13 ou superior)
+        Apache Zookeeper (versão 3.9 ou superior)
+        Apache Kafka (versão 2.13 ou superior)
+        Python (versão 3)
+        Pacote confluent_kafka
+
+    Instalação:
+        Baixar e configurar o Apache Zookeeper:
+            Baixe o pacote apache-zookeeper-3.9.2-bin.tar.gz do site oficial do Apache Zookeeper.
+            Descompacte o arquivo: tar -xvzf apache-zookeeper-3.9.2-bin.tar.gz
+            Execute o servidor Zookeeper: bin/zookeeper-server-start.sh config/zookeeper.properties
+
+        Baixar e configurar o Apache Kafka:
+            Baixe o pacote kafka_2.13-3.7.0.tgz do site oficial do Apache Kafka.
+            Descompacte o arquivo: tar -xvzf kafka_2.13-3.7.0.tgz
+            Execute o servidor Kafka: bin/kafka-server-start.sh config/server.properties
+
+        Criar um ambiente virtual Python:
+            Crie um ambiente virtual Python: python3 -m venv meu_ambiente_virtual
+            Ative o ambiente virtual: source meu_ambiente_virtual/bin/activate
+            Instale o pacote confluent_kafka: pip install confluent_kafka
+
+    Executando o Projeto:
+        Executar o produtor: Abra um novo terminal, navegue até o diretório raiz do projeto e execute o script producer.py: python3 producer.py
+
+        Executar o consumidor: Abra outro terminal, navegue até o diretório raiz do projeto e execute o script consumer.py: python3 consumer.py
+
+    
+    Descrição dos Códigos
+    producer.py:
+        Cria um produtor Kafka que se conecta ao broker em localhost:9092.
+        Solicita ao usuário que digite mensagens e as envia para o tópico meu_topico.
+        Utiliza um callback para confirmar o envio das mensagens com sucesso ou falha.
+
+    consumer.py:
+        Cria um consumidor Kafka que se conecta ao broker em localhost:9092.
+        Subscrita no tópico meu_topico.
+        Lê as mensagens recebidas e imprime no console.
+        Inclui tratamento de erros para lidar com erros ao receber mensagens.
+
+    Observações:
+        Execução servidor Kafka em localhost:9092.
+        O código usa um grupo de consumidores (group.id) para evitar que o consumidor leia as mesmas mensagens várias vezes.
+        A configuração auto.offset.reset=earliest indica que o consumidor deve começar a ler mensagens desde o início do tópico, caso não haja offsets salvos.
+        
+-----------------------------------------------------<end>
